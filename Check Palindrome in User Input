@@ -1,0 +1,13 @@
+Write an algorithm to check if a user-input string is a palindrome.
+
+fun isPalindrome(input: String): Boolean {
+    val sanitized = input.filter { it.isLetterOrDigit() }.lowercase()
+    return sanitized == sanitized.reversed()
+}
+
+fun main() {
+    println(isPalindrome("A man, a plan, a canal, Panama")) // Output: true
+    println(isPalindrome("Hello")) // Output: false
+}
+
+Reverse the string and compare it to the original.
