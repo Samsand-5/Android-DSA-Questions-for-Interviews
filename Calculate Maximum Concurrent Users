@@ -1,0 +1,29 @@
+You are given a list of login and logout times for users. Write an algorithm to calculate the maximum number of users active at the same time.
+
+fun maxConcurrentUsers(times: List<Pair<Int, Int>>): Int {
+    val events = mutableListOf<Pair<Int, Boolean>>()
+
+    for (time in times) {
+        events.add(time.first to true)  // Login event
+        events.add(time.second to false) // Logout event
+    }
+
+    events.sortWith(compareBy({ it.first }, { !it.second })) // Sort by time, logouts before logins if same time
+
+    var maxUsers = 0
+    var currentUsers = 0
+
+    for (event in events) {
+        if (event.second) currentUsers++ else currentUsers--
+        maxUsers = maxOf(maxUsers, currentUsers)
+    }
+
+    return maxUsers
+}
+
+fun main() {
+    val times = listOf(1 to 5, 2 to 6, 4 to 8)
+    println(maxConcurrentUsers(times)) // Output: 3
+}
+
+This is a classic interval problem that can be solved using sorting and a sweep-line technique
