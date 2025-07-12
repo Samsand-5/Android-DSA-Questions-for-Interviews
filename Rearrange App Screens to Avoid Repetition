@@ -1,0 +1,32 @@
+Given a list of screen IDs, rearrange them so that no two adjacent screens are the same. If not possible, return an empty list.
+
+import java.util.PriorityQueue
+
+fun rearrangeScreens(screens: List<String>): List<String> {
+    val freqMap = screens.groupingBy { it }.eachCount()
+    val pq = PriorityQueue<Map.Entry<String, Int>>(compareByDescending { it.value })
+    pq.addAll(freqMap.entries)
+
+    val result = mutableListOf<String>()
+    var prev: Map.Entry<String, Int>? = null
+
+    while (pq.isNotEmpty()) {
+        val current = pq.poll()
+        result.add(current.key)
+
+        if (prev != null && prev.value > 0) {
+            pq.offer(prev)
+        }
+
+        prev = current.copy(value = current.value - 1)
+    }
+
+    return if (result.size == screens.size) result else emptyList()
+}
+
+fun main() {
+    val screens = listOf("A", "A", "B", "B", "C")
+    println(rearrangeScreens(screens)) // Output: [A, B, A, C, B] or similar valid result
+}
+
+Use a max-heap (priority queue) to organize screens by their frequency.
