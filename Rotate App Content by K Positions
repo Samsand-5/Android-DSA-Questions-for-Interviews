@@ -1,0 +1,14 @@
+Rotate a list of app content (e.g., carousel items) to the right by K positions.
+
+fun rotateContent(content: List<Int>, k: Int): List<Int> {
+    val n = content.size
+    val rotations = k % n
+    return content.takeLast(rotations) + content.dropLast(rotations)
+}
+
+fun main() {
+    val content = listOf(1, 2, 3, 4, 5)
+    println(rotateContent(content, 2)) // Output: [4, 5, 1, 2, 3]
+}
+
+Use modular arithmetic and slicing.
