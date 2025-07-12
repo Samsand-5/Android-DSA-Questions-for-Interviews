@@ -1,0 +1,31 @@
+Given a linked list of user session data, detect if there’s a cycle in the list.
+
+
+class Node(var value: Int) {
+    var next: Node? = null
+}
+
+fun hasCycle(head: Node?): Boolean {
+    var slow = head
+    var fast = head
+
+    while (fast?.next != null) {
+        slow = slow?.next
+        fast = fast.next?.next
+
+        if (slow == fast) return true
+    }
+    return false
+}
+
+fun main() {
+    val head = Node(1)
+    val second = Node(2)
+    val third = Node(3)
+    head.next = second
+    second.next = third
+    third.next = second // Creates a cycle
+    println(hasCycle(head)) // Output: true
+}
+
+Use Floyd’s Cycle Detection Algorithm (fast and slow pointer).
