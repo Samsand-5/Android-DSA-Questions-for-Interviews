@@ -1,0 +1,19 @@
+You are building a gallery app that identifies duplicate images. Each image has a unique hash (String). Write an algorithm to find duplicates.
+
+fun findDuplicates(hashes: List<String>): List<String> {
+    val seen = mutableSetOf<String>()
+    val duplicates = mutableListOf<String>()
+    for (hash in hashes) {
+        if (!seen.add(hash)) {
+            duplicates.add(hash)
+        }
+    }
+    return duplicates
+}
+
+fun main() {
+    val imageHashes = listOf("hash1", "hash2", "hash3", "hash1", "hash4", "hash3")
+    println(findDuplicates(imageHashes)) // Output: [hash1, hash3]
+}
+
+Use a Set to track hashes as you iterate through the list of image hashes.
