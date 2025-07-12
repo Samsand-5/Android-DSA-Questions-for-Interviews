@@ -1,0 +1,37 @@
+You have two sorted lists of user data from two servers. Write an algorithm to merge them into one sorted list.
+
+un mergeSortedLists(list1: List<Int>, list2: List<Int>): List<Int> {
+    val result = mutableListOf<Int>()
+    var i = 0
+    var j = 0
+
+    while (i < list1.size && j < list2.size) {
+        if (list1[i] <= list2[j]) {
+            result.add(list1[i])
+            i++
+        } else {
+            result.add(list2[j])
+            j++
+        }
+    }
+
+    while (i < list1.size) {
+        result.add(list1[i])
+        i++
+    }
+
+    while (j < list2.size) {
+        result.add(list2[j])
+        j++
+    }
+
+    return result
+}
+
+fun main() {
+    val list1 = listOf(1, 3, 5)
+    val list2 = listOf(2, 4, 6)
+    println(mergeSortedLists(list1, list2)) // Output: [1, 2, 3, 4, 5, 6]
+}
+
+This is a classic merge problem, solvable using a two-pointer technique.
