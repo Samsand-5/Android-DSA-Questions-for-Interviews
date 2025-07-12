@@ -1,0 +1,15 @@
+In a list of sequential user IDs, one ID is missing. Write an algorithm to find the missing ID.
+
+fun findMissingId(ids: List<Int>): Int {
+    val n = ids.size + 1
+    val expectedSum = n * (n + 1) / 2
+    val actualSum = ids.sum()
+    return expectedSum - actualSum
+}
+
+fun main() {
+    val ids = listOf(1, 2, 3, 5)
+    println(findMissingId(ids)) // Output: 4
+}
+
+Use the sum formula for the first n natural numbers: Sum=n×(n+1)/2
