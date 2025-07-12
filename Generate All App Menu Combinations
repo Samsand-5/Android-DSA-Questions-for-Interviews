@@ -1,0 +1,23 @@
+You need to generate all possible combinations of app menu items for testing purposes.
+
+fun generateCombinations(menuItems: List<String>): List<List<String>> {
+    val result = mutableListOf<List<String>>()
+    fun backtrack(start: Int, combination: MutableList<String>) {
+        result.add(ArrayList(combination))
+        for (i in start until menuItems.size) {
+            combination.add(menuItems[i])
+            backtrack(i + 1, combination)
+            combination.removeAt(combination.size - 1)
+        }
+    }
+    backtrack(0, mutableListOf())
+    return result
+}
+
+fun main() {
+    val menu = listOf("Home", "Profile", "Settings")
+    println(generateCombinations(menu))
+    // Output: [[], [Home], [Home, Profile], [Home, Profile, Settings], [Home, Settings], [Profile], [Profile, Settings], [Settings]]
+}
+
+Use backtracking.
