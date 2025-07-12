@@ -1,0 +1,20 @@
+You are tasked with optimizing an app’s startup time. The app fetches a configuration file containing key-value pairs, which is frequently accessed during runtime. 
+Write an algorithm to load the configuration quickly and retrieve any value in O(1) time.
+
+
+fun loadConfigurations(configurations: List<Pair<String, String>>): Map<String, String> {
+    val configMap = mutableMapOf<String, String>()
+    for (config in configurations) {
+        configMap[config.first] = config.second
+    }
+    return configMap
+}
+
+fun main() {
+    val configurations = listOf("theme" to "dark", "fontSize" to "medium", "language" to "English")
+    val configMap = loadConfigurations(configurations)
+    println(configMap["theme"]) // Output: dark
+}
+
+
+This is a classic use case for a HashMap, which provides O(1) time complexity for lookups. Here’s how you can solve it:
