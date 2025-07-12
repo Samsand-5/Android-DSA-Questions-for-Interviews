@@ -1,0 +1,19 @@
+You need to design a caching mechanism for a news app to store articles and retrieve the most recently accessed article quickly
+
+class LRUCache<K, V>(private val capacity: Int) : LinkedHashMap<K, V>(capacity, 0.75f, true) {
+    override fun removeEldestEntry(eldest: MutableMap.MutableEntry<K, V>?): Boolean {
+        return size > capacity
+    }
+}
+
+fun main() {
+    val cache = LRUCache<String, String>(3)
+    cache["1"] = "Article 1"
+    cache["2"] = "Article 2"
+    cache["3"] = "Article 3"
+    println(cache) // Output: {1=Article 1, 2=Article 2, 3=Article 3}
+    cache["4"] = "Article 4" // This will remove the least recently used item
+    println(cache) // Output: {2=Article 2, 3=Article 3, 4=Article 4}
+}
+
+Use an LRU Cache (Least Recently Used), which can be implemented using LinkedHashMap in Kotlin.
