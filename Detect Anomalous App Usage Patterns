@@ -1,0 +1,18 @@
+Given a list of app usage durations, identify if any user exceeds a threshold in total usage for the day.
+
+fun detectAnomalousUsage(usageData: List<Pair<String, Int>>, threshold: Int): List<String> {
+    val userUsageMap = mutableMapOf<String, Int>()
+
+    for ((user, duration) in usageData) {
+        userUsageMap[user] = userUsageMap.getOrDefault(user, 0) + duration
+    }
+
+    return userUsageMap.filter { it.value > threshold }.keys.toList()
+}
+
+fun main() {
+    val usageData = listOf("user1" to 120, "user2" to 300, "user1" to 100, "user3" to 50)
+    println(detectAnomalousUsage(usageData, 200)) // Output: [user1, user2]
+}
+
+Use a HashMap to aggregate usage and compare against the threshold.
