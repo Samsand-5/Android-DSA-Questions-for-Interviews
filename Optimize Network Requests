@@ -1,0 +1,25 @@
+You need to debounce network requests in an app (e.g., a search bar). Write an algorithm to ignore multiple rapid inputs and only process the final one after a delay.
+
+import kotlinx.coroutines.*
+
+var searchJob: Job? = null
+
+fun performDebouncedSearch(query: String, delayMs: Long = 300L) {
+    searchJob?.cancel() // Cancel previous job if running
+    searchJob = CoroutineScope(Dispatchers.Main).launch {
+        delay(delayMs)
+        performSearch(query) // Call actual search function here
+    }
+}
+
+fun performSearch(query: String) {
+    println("Searching for: $query")
+}
+
+fun main() {
+    performDebouncedSearch("android")
+    performDebouncedSearch("android dev")
+    performDebouncedSearch("android developer") // Only this will execute after delay
+}
+
+Implement Debouncing using Handler or Coroutines.
