@@ -1,0 +1,22 @@
+Given a list of features used by app users, return the top K most frequently used features.
+
+fun topKFrequentFeatures(features: List<String>, k: Int): List<String> {
+    val frequencyMap = features.groupingBy { it }.eachCount()
+    val pq = PriorityQueue<Map.Entry<String, Int>>(compareBy { it.value })
+
+    for (entry in frequencyMap.entries) {
+        pq.add(entry)
+        if (pq.size > k) {
+            pq.poll()
+        }
+    }
+
+    return pq.map { it.key }
+}
+
+fun main() {
+    val features = listOf("login", "signup", "login", "profile", "login", "signup")
+    println(topKFrequentFeatures(features, 2)) // Output: ["signup", "login"]
+}
+
+Use a HashMap for counting and a PriorityQueue for sorting.
