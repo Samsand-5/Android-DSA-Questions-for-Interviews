@@ -1,0 +1,33 @@
+Given a graph of feature dependencies, determine if there is a cycle.
+
+fun hasCycle(graph: Map<String, List<String>>): Boolean {
+    val visited = mutableSetOf<String>()
+    val stack = mutableSetOf<String>()
+
+    fun dfs(node: String): Boolean {
+        if (node in stack) return true
+        if (node in visited) return false
+
+        visited.add(node)
+        stack.add(node)
+        for (neighbor in graph[node] ?: emptyList()) {
+            if (dfs(neighbor)) return true
+        }
+        stack.remove(node)
+        return false
+    }
+
+    return graph.keys.any { dfs(it) }
+}
+
+fun main() {
+    val featureGraph = mapOf(
+        "Login" to listOf("Home"),
+        "Home" to listOf("Profile"),
+        "Profile" to listOf("Settings"),
+        "Settings" to listOf("Home") // Cycle exists
+    )
+    println(hasCycle(featureGraph)) // Output: true
+}
+
+Use DFS with a visited set.
