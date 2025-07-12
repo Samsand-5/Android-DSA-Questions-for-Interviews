@@ -1,0 +1,12 @@
+You are given a list of user IDs, where each ID may appear multiple times. Write an algorithm to count the number of unique users.
+
+fun countUniqueUsers(userIds: List<String>): Int {
+    return userIds.toSet().size
+}
+
+fun main() {
+    val userIds = listOf("user1", "user2", "user1", "user3", "user2")
+    println(countUniqueUsers(userIds)) // Output: 3
+}
+
+Use a HashSet to store unique IDs.
